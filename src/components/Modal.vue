@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="modalOpen">
+  <q-dialog v-model="localVisible" @update:model-value="updateVisible">
     <q-card>
       <q-card-section>
         <q-card-title class="text-h6">Adicionar Patrimônio</q-card-title>
@@ -11,7 +11,7 @@
           <q-input outlined v-model="lote" label="Lote" type="number" />
           <q-card-actions align="right">
             <q-btn label="Cancelar" color="negative" @click="closeModal" />
-            <q-btn type="submit" label="Salvar" color="primary" />
+            <q-btn type="button" label="Salvar" color="primary" @click="handleSubmit" />
           </q-card-actions>
         </q-form>
       </q-card-section>
@@ -20,17 +20,22 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Modal',
-  setup() {
-    const modalOpen = ref(false);
+  props: {
+    visible: Boolean,
+    onSave: Function,
+    onCloseModal: Function
+  },
+  setup(props) {
     const categoria = ref('');
     const detalhe = ref('');
     const dataAquisicao = ref('');
     const valorAquisicao = ref(0);
     const lote = ref(null);
+    const localVisible = ref(props.visible);
 
     const handleSubmit = () => {
       const patrimonio = {
@@ -40,30 +45,37 @@ export default {
         valorAquisicao: parseFloat(valorAquisicao.value),
         lote: lote.value
       };
-      // Aqui você pode fazer o que desejar com o objeto patrimonio, como emitir um evento para o componente pai
+      props.onSave(patrimonio);
+      console.log(patrimonio);
       closeModal();
     };
 
     const closeModal = () => {
-      modalOpen.value = false;
-      // Limpar os campos do formulário ao fechar o modal
+      localVisible.value = false;
       categoria.value = '';
       detalhe.value = '';
       dataAquisicao.value = '';
       valorAquisicao.value = 0;
       lote.value = null;
+      props.onCloseModal();
+    };
+
+    // Atualize a variável local quando a propriedade visível é alterada externamente
+    const updateVisible = (value) => {
+      localVisible.value = value;
     };
 
     return {
-      modalOpen,
       categoria,
       detalhe,
       dataAquisicao,
       valorAquisicao,
       lote,
+      localVisible,
       handleSubmit,
-      closeModal
+      closeModal,
+      updateVisible
     };
   }
-};
+});
 </script>

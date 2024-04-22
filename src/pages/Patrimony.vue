@@ -1,15 +1,23 @@
 <template>
   <div class="q-pa-md">
     <q-btn @click="openModal" label="Adicionar Patrimônio" color="primary" />
-    <Modal :modalOpen="modalOpen" @closeModal="modalOpen = false" />
+    <Modal v-if="modalOpen" :visible="modalOpen" @update:visible="modalOpen = $event" :onCloseModal="closeModal"
+      :onSave="savePatrimonio" />
     <q-table id="table" flat bordered title="Patrimônios" :rows="rows" :columns="columns" row-key="id" virtual-scroll
-      v-model:pagination="pagination" :rows-per-page-options="[rows.length]" />
+      v-model:pagination="pagination" :rows-per-page-options="[rows.length]">
+      <template v-slot:body-cell-actions="props">
+        <div class="q-gutter-md">
+          <q-btn v-for="(button, index) in props.row.buttons" :key="index" @click="performAction(props.row, button)"
+            :label="button.label" :color="button.color" />
+        </div>
+      </template>
+    </q-table>
   </div>
 </template>
 
+
 <script>
 import { ref } from 'vue'
-import ActionButton from '../components/ActionButton.vue'
 import Modal from 'src/components/Modal.vue';
 
 const columns = [
@@ -57,8 +65,8 @@ const columns = [
   {
     name: 'actions',
     label: 'Ações',
-    field: 'actions',
     align: 'center',
+    field: 'actions'
   }
 ]
 
@@ -75,7 +83,7 @@ const patrimonios = [
     dataRecolhimento: null,
     motivoRecolhimento: "",
     estadoConservacao: "novo",
-    detalheConservacao: "Em perfeito estado"
+    detalheConservacao: "Em perfeito estado",
   },
   {
     id: 127,
@@ -89,7 +97,7 @@ const patrimonios = [
     dataRecolhimento: "2024-04-10",
     motivoRecolhimento: "Término do contrato",
     estadoConservacao: "marcas de uso",
-    detalheConservacao: "Funciona perfeitamente, mas com algumas marcas de uso visíveis."
+    detalheConservacao: "Funciona perfeitamente, mas com algumas marcas de uso visíveis.",
   },
   {
     id: 128,
@@ -149,37 +157,60 @@ const patrimonios = [
   }
 ];
 
-const rows = patrimonios.map(patrimonio => ({
+const rows = ref(patrimonios.map(patrimonio => ({
   ...patrimonio,
-  actions: {
-    component: ActionButton,
-    id: patrimonio.id
-  }
-}));
+  buttons: [
+    { label: 'Editar', action: 'editPatrimonio', color: 'green' },
+    { label: 'Inativar', action: 'inativarPatrimonio', color: 'negative' }
+  ]
+})));
+
 
 export default {
   components: {
-    ActionButton,
     Modal
   },
   setup() {
     const modalOpen = ref(false);
+    const rowsPerPageOptions = ref([patrimonios.length]);
 
-    // Método para abrir o modal
     const openModal = () => {
       modalOpen.value = true;
     };
+
+    const closeModal = () => {
+      modalOpen.value = false;
+    };
+
+    const performAction = (row, button) => {
+      if (button.action === 'editPatrimonio') {
+        // Lógica para editar o patrimônio
+        console.log('Editar patrimônio:', row);
+      } else if (button.action === 'inativarPatrimonio') {
+        // Lógica para inativar o patrimônio
+        console.log('Inativar patrimônio:', row);
+      }
+    };
+
+    const savePatrimonio = (patrimonio) => {
+      rows.value.unshift({ ...patrimonio, actions: { id: patrimonio.id } });
+    };
+
     return {
       columns,
       rows,
       modalOpen,
       openModal,
+      closeModal,
+      performAction,
+      savePatrimonio,
       pagination: ref({
-        rowsPerPage: rows.length
-      })
-    }
+        rowsPerPage: 1000
+      }),
+      rowsPerPageOptions
+    };
   }
-}
+};
 </script>
 
 <style scoped>
