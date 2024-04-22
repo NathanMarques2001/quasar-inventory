@@ -16,10 +16,10 @@ import Card from '../components/Card.vue';
 import { ref, computed } from 'vue';
 
 const regions = [
-  { title: 'GSI', numberOfPeople: 25, numberOfAssets: 230 },
-  { title: 'GS', numberOfPeople: 50, numberOfAssets: 150 },
-  { title: 'TI', numberOfPeople: 50, numberOfAssets: 150 },
-  { title: 'RH', numberOfPeople: 50, numberOfAssets: 150 }
+  { title: 'GSI', numberOfPeople: 2 },
+  { title: 'GS', numberOfPeople: 1 },
+  { title: 'TI', numberOfPeople: 2 },
+  { title: 'RH', numberOfPeople: 2 }
 ];
 
 const searchTerm = ref('');

@@ -1,10 +1,12 @@
 <template>
   <div class="q-pa-md">
-    <q-btn @click="openModal" label="Adicionar Patrimônio" color="primary" />
-    <Modal v-if="modalOpen" :visible="modalOpen" @update:visible="modalOpen = $event" :onCloseModal="closeModal"
+    <q-btn @click="openModal(null)" label="Adicionar Patrimônio" color="primary" />
+    <EditForm v-if="modalOpen && modalType === 'edit'" :visible="modalOpen" @update:visible="modalOpen = $event" :onCloseModal="closeModal"
+      :onSave="savePatrimonio" :patrimonio="editedPatrimonio" />
+    <Modal v-else-if="modalOpen && modalType === 'add'" :visible="modalOpen" @update:visible="modalOpen = $event" :onCloseModal="closeModal"
       :onSave="savePatrimonio" />
     <q-table id="table" flat bordered title="Patrimônios" :rows="rows" :columns="columns" row-key="id" virtual-scroll
-      v-model:pagination="pagination" :rows-per-page-options="[rows.length]">
+      v-model:pagination="pagination" :rows-per-page-options="rowsPerPageOptions">
       <template v-slot:body-cell-actions="props">
         <div class="q-gutter-md">
           <q-btn v-for="(button, index) in props.row.buttons" :key="index" @click="performAction(props.row, button)"
@@ -15,10 +17,10 @@
   </div>
 </template>
 
-
 <script>
 import { ref } from 'vue'
 import Modal from 'src/components/Modal.vue';
+import EditForm from 'src/components/EditForm.vue';
 
 const columns = [
   {
@@ -168,13 +170,23 @@ const rows = ref(patrimonios.map(patrimonio => ({
 
 export default {
   components: {
-    Modal
+    Modal,
+    EditForm
   },
   setup() {
     const modalOpen = ref(false);
+    const modalType = ref('add'); // Para controlar se o modal é para adicionar ou editar
     const rowsPerPageOptions = ref([patrimonios.length]);
+    const editedPatrimonio = ref(null);
 
-    const openModal = () => {
+    const openModal = (patrimonio = null) => {
+      if (patrimonio) {
+        editedPatrimonio.value = patrimonio;
+        modalType.value = 'edit'; // Definindo o tipo de modal como "edit" ao editar um patrimônio
+      } else {
+        editedPatrimonio.value = null;
+        modalType.value = 'add'; // Definindo o tipo de modal como "add" ao adicionar um patrimônio
+      }
       modalOpen.value = true;
     };
 
@@ -184,22 +196,28 @@ export default {
 
     const performAction = (row, button) => {
       if (button.action === 'editPatrimonio') {
-        // Lógica para editar o patrimônio
-        console.log('Editar patrimônio:', row);
+        openModal(row);
       } else if (button.action === 'inativarPatrimonio') {
-        // Lógica para inativar o patrimônio
+        row.ativo = false;
         console.log('Inativar patrimônio:', row);
       }
     };
 
     const savePatrimonio = (patrimonio) => {
-      rows.value.unshift({ ...patrimonio, actions: { id: patrimonio.id } });
+      if (editedPatrimonio.value) {
+        Object.assign(editedPatrimonio.value, patrimonio);
+        editedPatrimonio.value = null;
+      } else {
+        rows.value.unshift({ ...patrimonio, id: Date.now() });
+      }
+      closeModal();
     };
 
     return {
       columns,
       rows,
       modalOpen,
+      modalType,
       openModal,
       closeModal,
       performAction,
@@ -218,5 +236,11 @@ export default {
   min-height: 80vh;
   background-color: #1C1D22;
   color: #FFFFFF;
+}
+.q-pa-md{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 </style>

@@ -3,7 +3,6 @@
     <q-card-section>
       <div class="text-h5"><b>{{ title }}</b></div>
       <div class="text-subtitle">Quantidade de pessoas: <b>{{ numberOfPeople }}</b></div>
-      <div class="text-subtitle">Quantidade de patrimônios: <b>{{ numberOfAssets }}</b></div>
     </q-card-section>
 
     <q-card-actions vertical>
@@ -19,8 +18,7 @@ export default {
   name: 'Card',
   props: {
     title: String,
-    numberOfPeople: Number,
-    numberOfAssets: Number
+    numberOfPeople: Number
   },
   setup() {
     const redirectToPeople = (title) => {
@@ -41,6 +39,7 @@ export default {
   background-color: #1C1D22;
   color: #FFFFFF;
   width: 25%;
+  min-width: 160px;
   box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.5);
   border: 1px solid #FFFFFF;
   border-radius: 20px;

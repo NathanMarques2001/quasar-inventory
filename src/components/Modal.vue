@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="localVisible" @update:model-value="updateVisible">
-    <q-card>
+    <q-card id="modal">
       <q-card-section>
         <q-card-title class="text-h6">Adicionar Patrimônio</q-card-title>
         <q-form @submit="handleSubmit">
@@ -9,6 +9,8 @@
           <q-input outlined v-model="dataAquisicao" label="Data de Aquisição" type="date" />
           <q-input outlined v-model="valorAquisicao" label="Valor de Aquisição" type="number" />
           <q-input outlined v-model="lote" label="Lote" type="number" />
+          <q-input outlined v-model="areaAtribuicao" label="Área Atribuição" type="text" />
+          <q-input outlined v-model="funcionarioAtribuicao" label="Funcionário Atribuição" type="text" />
           <q-card-actions align="right">
             <q-btn label="Cancelar" color="negative" @click="closeModal" />
             <q-btn type="button" label="Salvar" color="primary" @click="handleSubmit" />
@@ -35,6 +37,8 @@ export default defineComponent({
     const dataAquisicao = ref('');
     const valorAquisicao = ref(0);
     const lote = ref(null);
+    const areaAtribuicao = ref('');
+    const funcionarioAtribuicao = ref('');
     const localVisible = ref(props.visible);
 
     const handleSubmit = () => {
@@ -43,7 +47,9 @@ export default defineComponent({
         detalhe: detalhe.value,
         dataAquisicao: dataAquisicao.value,
         valorAquisicao: parseFloat(valorAquisicao.value),
-        lote: lote.value
+        lote: lote.value,
+        areaAtribuicao: areaAtribuicao.value,
+        funcionarioAtribuicao: funcionarioAtribuicao.value
       };
       props.onSave(patrimonio);
       console.log(patrimonio);
@@ -57,6 +63,8 @@ export default defineComponent({
       dataAquisicao.value = '';
       valorAquisicao.value = 0;
       lote.value = null;
+      areaAtribuicao.value = '';
+      funcionarioAtribuicao.value = '';
       props.onCloseModal();
     };
 
@@ -71,6 +79,8 @@ export default defineComponent({
       dataAquisicao,
       valorAquisicao,
       lote,
+      areaAtribuicao,
+      funcionarioAtribuicao,
       localVisible,
       handleSubmit,
       closeModal,
@@ -79,3 +89,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+#modal {
+  width: 60%;
+}
+</style>
