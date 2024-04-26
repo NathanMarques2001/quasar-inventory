@@ -1,0 +1,26 @@
+.header {
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  height: 10vh;
+  padding: 1% 3%;
+}
+
+.header-img-logo {
+  height: 70%;
+}
+
+.header-navbar {
+  width: 100%;
+}
+
+.header-list-links {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 5%;
+}
+
+#area-body {
+  background-color: var(--background);
+}
