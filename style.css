@@ -1,47 +1,14 @@
-.header {
-  background-color: var(--black);
-  display: flex;
-  align-items: center;
-  height: 5.5vw;
-  padding: 1% 4%;
-}
-
-.header-img-logo {
-  width: 10.76vw;
-}
-
-.header-navbar {
-  width: 100%;
-}
-
-.header-list-links {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  gap: 5%;
-}
-
-.header-navbar-link-item {
-  display: flex;
-}
-
-.area-link {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 20px;
-}
-
-#area-body {
+#index-body {
   background-color: var(--background);
 }
 
-#area-body-container {
+#index-body-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#area-input {
+#index-input {
   width: 92.5%;
   margin: 20px 0;
   padding: 1%;
@@ -51,156 +18,27 @@
   color: var(--white);
 }
 
-#area-input::placeholder {
+#index-input::placeholder {
   color: var(--light-gray);
 }
 
-#area-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
+#index-table {
   width: 92.5%;
-}
-
-.area-card {
-  background-color: var(--black);
-  color: var(--white);
-  width: 264px;
-  padding: 34px 18px 28px 18px;
+  border-radius: 5px;
   border: 1px solid var(--light-gray);
-  border-radius: 5px;
-  margin-bottom: 40px;
 }
 
-.area-card-title {
-  padding-bottom: 34px;
-  font-size: 28px;
+#index-table th,
+#index-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.area-card-number-people,
-.area-card-number-patrimony {
-  font-size: 14px;
-}
-
-.area-card-number-people {
-  padding-bottom: 14px;
-}
-
-.area-card-number-patrimony {
-  padding-bottom: 32px;
-}
-
-.area-card-btn {
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  color: var(--white);
+#index-table th {
   background-color: var(--deep-blue);
-  font-size: 14px;
-  height: 39px;
 }
 
-.area-card-btn:hover {
-  background-color: var(--hover-deep-blue);
-  cursor: pointer;
-}
-
-/* MEDIA QUERIES */
-
-/* Notebook */
-@media screen and (min-width: 1024px) and (max-width: 1365px) {
-
-  .area-link {
-    font-size: 16px;
-  }
-
-  .area-card-title {
-    font-size: 24px;
-  }
-
-  .area-card-number-people,
-  .area-card-number-patrimony {
-    font-size: 12px;
-  }
-
-  .area-card-btn {
-    font-size: 12px;
-  }
-}
-
-/* Tablet */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-
-  .area-link {
-    font-size: 12px;
-  }
-
-  .area-card-title {
-    font-size: 20px;
-  }
-
-  .area-card-number-people,
-  .area-card-number-patrimony {
-    font-size: 10px;
-  }
-
-  .area-card-btn {
-    font-size: 10px;
-    height: 30px;
-  }
-}
-
-/* Mobile */
-@media screen and (max-width: 767px) {
-  .header-img-logo {
-    width: 14vw;
-  }
-
-  .area-link,
-  .area-card-number-people,
-  .area-card-number-patrimony,
-  .area-card-btn {
-    font-size: 8px;
-  }
-
-  .area-card-title {
-    font-size: 16px;
-  }
-
-  #area-input {
-    width: 85%;
-    padding: 2.5%;
-    border-radius: 3px;
-  }
-
-  #area-input::placeholder {
-    font-size: 10px;
-  }
-
-  .area-card {
-    width: 250px;
-    padding: 30px 14px 24px 14px;
-    margin-bottom: 30px;
-  }
-
-  .area-card-btn {
-    height: 24px;
-  }
-
-  .area-card-title {
-    padding-bottom: 28px;
-  }
-
-  .area-card-number-people {
-    padding-bottom: 8px;
-  }
-
-  .area-card-number-patrimony {
-    padding-bottom: 26px;
-  }
-
-  .header {
-    height: 8vw;
-  }
+#index-table tbody tr:hover {
+  background-color: #f5f5f5;
 }
