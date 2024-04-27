@@ -21,6 +21,10 @@
   gap: 5%;
 }
 
+.header-navbar-link-item {
+  display: flex;
+}
+
 .area-link {
   color: var(--white);
   text-decoration: none;

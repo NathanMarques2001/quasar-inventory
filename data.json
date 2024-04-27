@@ -1,0 +1,24 @@
+{
+  "areas": [
+    {
+      "name": "GSI",
+      "people_quantity": 2,
+      "patrimony_quantity": 5
+    },
+    {
+      "name": "GS",
+      "people_quantity": 3,
+      "patrimony_quantity": 6
+    },
+    {
+      "name": "TI",
+      "people_quantity": 4,
+      "patrimony_quantity": 7
+    },
+    {
+      "name": "RH",
+      "people_quantity": 5,
+      "patrimony_quantity": 8
+    }
+  ]
+}
