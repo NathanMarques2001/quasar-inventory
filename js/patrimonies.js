@@ -36,9 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function fillTable(areas) {
         const tableBody = document.getElementById("table-body");
         tableBody.innerHTML = ""; // Limpa o conteúdo anterior
-    
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramValue = urlParams.get('area');
+        console.log(paramValue)
+
         areas.forEach(area => {
             area.patrimonies.forEach(patrimony => {
+                if (area.name.toLowerCase() == paramValue) {
                     const row = document.createElement("tr");
                     row.innerHTML = `
                         <td>${patrimony.category}</td>
@@ -53,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </td>
                     `;
                     tableBody.appendChild(row);
+                }
             });
         });
     }
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Editado!");
         } else if (target.classList.contains("deactivate-button")) {
             const activeCell = target.parentNode.parentNode.querySelector("td:nth-child(3)");
-    
+
             if (activeCell.textContent === "Sim") {
                 activeCell.textContent = "Não";
                 target.className = "reactivate-button";
@@ -72,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         } else if (target.classList.contains("reactivate-button")) {
             const activeCell = target.parentNode.parentNode.querySelector("td:nth-child(3)");
-    
+
             if (activeCell.textContent === "Não") {
                 activeCell.textContent = "Sim";
                 target.className = "deactivate-button";
@@ -81,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-    
+
 
     // Carregar os dados das áreas
     fetch(jsonFile)

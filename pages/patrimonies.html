@@ -7,14 +7,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/patrimonies.css" />
+  <link rel="stylesheet" type="text/css" href="../style.css" />
   <link rel="stylesheet" type="text/css" href="../css/reset.css" />
   <link rel="stylesheet" type="text/css" href="../css/global.css" />
-  <title>Areas</title>
+  <title>Patrimônios</title>
 </head>
 
-<body id="area-body">
+<body id="index-body">
   <script src="../components/navbar.js"></script>
+  <main id="index-body-container">
+    <input type="text" id="index-input" placeholder="Pesquise pelo detalhe">
+    <table id="index-table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Detalhe</th>
+          <th>Ativo</th>
+          <th>Área</th>
+          <th>Funcionário</th>
+          <th>Estado</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+  </main>
+  <script src="../js/patrimonies.js"></script>
 </body>
 
 </html>
