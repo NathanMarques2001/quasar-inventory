@@ -34,7 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("table-body").addEventListener("click", function (event) {
         const target = event.target;
         if (target.classList.contains("edit-button")) {
-            alert("Editado!");
+            const data = {
+                category: target.parentNode.parentNode.querySelector("td:nth-child(1)").textContent,
+                detail: target.parentNode.parentNode.querySelector("td:nth-child(2)").textContent,
+                employee: target.parentNode.parentNode.querySelector("td:nth-child(5)").textContent,
+                state: target.parentNode.parentNode.querySelector("td:nth-child(6)").textContent
+            }
+            openForm(data);
         } else if (target.classList.contains("deactivate-button")) {
             const activeCell = target.parentNode.parentNode.querySelector("td:nth-child(3)");
 
@@ -121,4 +127,16 @@ function fillTable(areas) {
 function getQueryParam() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('area');
+}
+
+function openForm(data) {
+    document.querySelector("#edit-form-container").style.display = "block";
+    document.querySelector("#category-input").value = data.category;
+    document.querySelector("#detail-input").value = data.detail
+    document.querySelector("#employee-input").value = data.employee;
+    document.querySelector("#state-input").value = data.state;
+
+    document.querySelector("#save-button").addEventListener("click", function () {
+        
+    })
 }

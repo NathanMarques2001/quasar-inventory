@@ -1,11 +1,13 @@
 {
   "areas": [
     {
+      "id": 1,
       "name": "GSI",
       "people_quantity": 2,
       "patrimony_quantity": 5,
       "patrimonies": [
         {
+          "id": 1,
           "category": "Category 1",
           "detail": "Detail 1",
           "active": true,
@@ -13,6 +15,7 @@
           "state": "State GSI-1"
         },
         {
+          "id": 2,
           "category": "Category 2",
           "detail": "Detail 2",
           "active": false,
@@ -20,6 +23,7 @@
           "state": "State GSI-2"
         },
         {
+          "id": 3,
           "category": "Category 3",
           "detail": "Detail 3",
           "active": true,
@@ -27,6 +31,7 @@
           "state": "State GSI-3"
         },
         {
+          "id": 4,
           "category": "Category 4",
           "detail": "Detail 4",
           "active": true,
@@ -34,6 +39,7 @@
           "state": "State GSI-4"
         },
         {
+          "id": 5,
           "category": "Category 5",
           "detail": "Detail 5",
           "active": true,
@@ -43,11 +49,13 @@
       ]
     },
     {
+      "id": 2,
       "name": "GS",
       "people_quantity": 3,
       "patrimony_quantity": 6,
       "patrimonies": [
         {
+          "id": 6,
           "category": "Category 1",
           "detail": "Detail 1",
           "active": false,
@@ -55,6 +63,7 @@
           "state": "State GS-1"
         },
         {
+          "id": 7,
           "category": "Category 2",
           "detail": "Detail 2",
           "active": false,
@@ -62,6 +71,7 @@
           "state": "State GS-2"
         },
         {
+          "id": 8,
           "category": "Category 3",
           "detail": "Detail 3",
           "active": true,
@@ -69,6 +79,7 @@
           "state": "State GS-3"
         },
         {
+          "id": 9,
           "category": "Category 4",
           "detail": "Detail 4",
           "active": true,
@@ -76,6 +87,7 @@
           "state": "State GS-4"
         },
         {
+          "id": 10,
           "category": "Category 5",
           "detail": "Detail 5",
           "active": false,
@@ -83,6 +95,7 @@
           "state": "State GS-5"
         },
         {
+          "id": 11,
           "category": "Category 6",
           "detail": "Detail 6",
           "active": false,
@@ -92,11 +105,13 @@
       ]
     },
     {
+      "id": 3,
       "name": "TI",
       "people_quantity": 4,
       "patrimony_quantity": 7,
       "patrimonies": [
         {
+          "id": 12,
           "category": "Category 1",
           "detail": "Detail 1",
           "active": true,
@@ -104,6 +119,7 @@
           "state": "State TI-1"
         },
         {
+          "id": 13,
           "category": "Category 2",
           "detail": "Detail 2",
           "active": true,
@@ -111,6 +127,7 @@
           "state": "State TI-2"
         },
         {
+          "id": 14,
           "category": "Category 3",
           "detail": "Detail 3",
           "active": true,
@@ -118,6 +135,7 @@
           "state": "State TI-3"
         },
         {
+          "id": 15,
           "category": "Category 4",
           "detail": "Detail 4",
           "active": false,
@@ -125,6 +143,7 @@
           "state": "State TI-4"
         },
         {
+          "id": 16,
           "category": "Category 5",
           "detail": "Detail 5",
           "active": true,
@@ -132,6 +151,7 @@
           "state": "State TI-5"
         },
         {
+          "id": 17,
           "category": "Category 6",
           "detail": "Detail 6",
           "active": true,
@@ -139,6 +159,7 @@
           "state": "State TI-6"
         },
         {
+          "id": 18,
           "category": "Category 7",
           "detail": "Detail 7",
           "active": false,
@@ -148,11 +169,13 @@
       ]
     },
     {
+      "id": 4,
       "name": "RH",
       "people_quantity": 5,
       "patrimony_quantity": 8,
       "patrimonies": [
         {
+          "id": 19,
           "category": "Category 1",
           "detail": "Detail 1",
           "active": true,
@@ -160,6 +183,7 @@
           "state": "State RH-1"
         },
         {
+          "id": 20,
           "category": "Category 2",
           "detail": "Detail 2",
           "active": false,
@@ -167,6 +191,7 @@
           "state": "State RH-2"
         },
         {
+          "id": 21,
           "category": "Category 3",
           "detail": "Detail 3",
           "active": true,
@@ -174,6 +199,7 @@
           "state": "State RH-3"
         },
         {
+          "id": 22,
           "category": "Category 4",
           "detail": "Detail 4",
           "active": true,
@@ -181,6 +207,7 @@
           "state": "State RH-4"
         },
         {
+          "id": 23,
           "category": "Category 5",
           "detail": "Detail 5",
           "active": true,
@@ -188,6 +215,7 @@
           "state": "State RH-5"
         },
         {
+          "id": 24,
           "category": "Category 6",
           "detail": "Detail 6",
           "active": false,
@@ -195,6 +223,7 @@
           "state": "State RH-6"
         },
         {
+          "id": 25,
           "category": "Category 7",
           "detail": "Detail 7",
           "active": true,
@@ -202,6 +231,7 @@
           "state": "State RH-7"
         },
         {
+          "id": 26,
           "category": "Category 8",
           "detail": "Detail 8",
           "active": false,
