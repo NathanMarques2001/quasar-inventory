@@ -1,142 +1,111 @@
-
-function generateTable() {
-    const tableContainer = document.getElementById("index-body-container");
-    const table = document.createElement("table");
-    table.setAttribute("id", "table");
-    const thead = document.createElement("thead");
-    const tbody = document.createElement("tbody");
-    thead.innerHTML = `
-            <tr>
-                <th>Categoria</th>
-                <th>Detalhe</th>
-                <th>Ativo</th>
-                <th>Área</th>
-                <th>Funcionário</th>
-                <th>Estado</th>
-                <th>Ações</th>
-            </tr>
-        `;
-    tbody.setAttribute("id", "table-body");
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    tableContainer.appendChild(table);
-}
-
-// Chama a função para gerar a tabela quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", function () {
-    generateTable();
+    const formEdicao = document.getElementById('form-edicao');
+    const tbody = document.querySelector('tbody');
+    const background = document.getElementById('form-container');
 
-    document.getElementById("index-input").addEventListener("input", function () {
-        const query = this.value.trim();
-        filterTableByDetail(query);
-    });
-
-    document.getElementById("table-body").addEventListener("click", function (event) {
-        const target = event.target;
-        if (target.classList.contains("edit-button")) {
-            const data = {
-                category: target.parentNode.parentNode.querySelector("td:nth-child(1)").textContent,
-                detail: target.parentNode.parentNode.querySelector("td:nth-child(2)").textContent,
-                employee: target.parentNode.parentNode.querySelector("td:nth-child(5)").textContent,
-                state: target.parentNode.parentNode.querySelector("td:nth-child(6)").textContent
-            }
-            openForm(data);
-        } else if (target.classList.contains("deactivate-button")) {
-            const activeCell = target.parentNode.parentNode.querySelector("td:nth-child(3)");
-
-            if (activeCell.textContent === "Sim") {
-                activeCell.textContent = "Não";
-                target.className = "reactivate-button";
-                target.textContent = "Reativar";
-                alert("O patrimônio foi inativado.");
-            }
-        } else if (target.classList.contains("reactivate-button")) {
-            const activeCell = target.parentNode.parentNode.querySelector("td:nth-child(3)");
-
-            if (activeCell.textContent === "Não") {
-                activeCell.textContent = "Sim";
-                target.className = "deactivate-button";
-                target.textContent = "Inativar";
-                alert("O patrimônio foi reativado.");
-            }
-        }
-    });
-
-    fetch("../data.json")
+    // Supondo que o JSON esteja no arquivo "data.json"
+    fetch('../data.json')
         .then(response => response.json())
         .then(data => {
-            fillTable(data.areas);
-        })
-        .catch(error => {
-            console.error("Erro ao carregar o JSON: ", error);
-        });
-});
-
-function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", jsonFile, true);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == 200) {
-            callback(JSON.parse(xobj.responseText));
-        }
-    };
-    xobj.send(null);
-}
-
-function filterTableByDetail(query) {
-    const rows = document.querySelectorAll("#table-body tr");
-    rows.forEach(row => {
-        const detailCell = row.querySelector("td:nth-child(2)"); // Segundo TD contém o detalhe do patrimônio
-        const detail = detailCell.textContent.trim().toLowerCase();
-        if (detail.includes(query.toLowerCase())) {
-            row.style.display = ""; // Exibe a linha se o detalhe do patrimônio corresponder à pesquisa
-        } else {
-            row.style.display = "none"; // Oculta a linha se o detalhe do patrimônio não corresponder à pesquisa
-        }
-    });
-}
-
-function fillTable(areas) {
-    const tableBody = document.getElementById("table-body");
-    tableBody.innerHTML = ""; // Limpa o conteúdo anterior
-
-    areas.forEach(area => {
-        area.patrimonies.forEach(patrimony => {
-            const queryParam = getQueryParam();
-            if (queryParam == area.name.toLowerCase() || queryParam == null) {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${patrimony.category}</td>
-                    <td>${patrimony.detail}</td>
-                    <td>${patrimony.active ? "Sim" : "Não"}</td>
-                    <td>${area.name}</td>
-                    <td>${patrimony.employee}</td>
-                    <td>${patrimony.state}</td>
+            // Função para adicionar uma linha à tabela
+            function adicionarLinha(id, categoria, detalhe, ativo, funcionario, estado) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${categoria}</td>
+                    <td>${detalhe}</td>
+                    <td>${ativo ? 'Sim' : 'Não'}</td>
+                    <td>${funcionario}</td>
+                    <td>${estado}</td>
                     <td>
-                        <button class="edit-button">Editar</button>
-                        <button class="${patrimony.active ? 'deactivate-button' : 'reactivate-button'}">${patrimony.active ? "Inativar" : "Reativar"}</button>
+                        <button class="edit-button" data-patrimonio-id="${id}">Editar</button>
+                        <button class="${ativo ? 'deactivate-button' : 'reactivate-button'}">${ativo ? 'Desativar' : 'Reativar'}</button>
                     </td>
                 `;
-                tableBody.appendChild(row);
+                tbody.appendChild(tr);
+            }
+
+            // Iterar sobre as áreas e patrimônios para adicionar à tabela
+            data.areas.forEach(area => {
+                area.patrimonies.forEach(patrimonio => {
+                    adicionarLinha(
+                        patrimonio.id,
+                        patrimonio.category,
+                        patrimonio.detail,
+                        patrimonio.active,
+                        patrimonio.employee,
+                        patrimonio.state
+                    );
+                });
+            });
+        })
+        .catch(error => console.error('Erro ao carregar o JSON:', error));
+
+    tbody.addEventListener('click', function (event) {
+        const target = event.target;
+        const row = target.closest('tr');
+
+        if (target.classList.contains('edit-button')) {
+            const patrimonioId = target.dataset.patrimonioId;
+            const categoria = row.querySelector('td:nth-child(1)').textContent.trim();
+            const detalhe = row.querySelector('td:nth-child(2)').textContent.trim();
+            const ativo = row.querySelector('td:nth-child(3)').textContent.trim() === 'Sim';
+            const funcionario = row.querySelector('td:nth-child(4)').textContent.trim();
+            const estado = row.querySelector('td:nth-child(5)').textContent.trim();
+
+            document.getElementById('edit-patrimonio-id').value = patrimonioId;
+            document.getElementById('edit-categoria').value = categoria;
+            document.getElementById('edit-detalhe').value = detalhe;
+            document.getElementById('edit-ativo').checked = ativo;
+            document.getElementById('edit-funcionario').value = funcionario;
+            document.getElementById('edit-estado').value = estado;
+
+            formEdicao.style.display = 'block';
+            background.style.display = 'block';
+        } else if (target.classList.contains('deactivate-button') || target.classList.contains('reactivate-button')) {
+            const ativo = row.querySelector('td:nth-child(3)');
+            ativo.textContent = ativo.textContent === 'Sim' ? 'Não' : 'Sim';
+            target.textContent = ativo.textContent === 'Sim' ? 'Desativar' : 'Reativar';
+            target.className = ativo.textContent === 'Sim' ? 'deactivate-button' : 'reactivate-button';
+            const patrimonioId = target.parentElement.querySelector('.edit-button').dataset.patrimonioId;
+            editarPatrimonio(patrimonioId, ativo.textContent === 'Sim', ativo.parentElement.querySelector('td:nth-child(1)').textContent.trim(), ativo.parentElement.querySelector('td:nth-child(2)').textContent.trim(), ativo.parentElement.querySelector('td:nth-child(4)').textContent.trim(), ativo.parentElement.querySelector('td:nth-child(5)').textContent.trim());
+        }
+    });
+
+    formEdicao.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const patrimonioId = document.getElementById('edit-patrimonio-id').value;
+        const categoria = document.getElementById('edit-categoria').value;
+        const detalhe = document.getElementById('edit-detalhe').value;
+        const ativo = document.getElementById('edit-ativo').checked;
+        const funcionario = document.getElementById('edit-funcionario').value;
+        const estado = document.getElementById('edit-estado').value;
+
+        editarPatrimonio(patrimonioId, ativo, categoria, detalhe, funcionario, estado);
+
+        formEdicao.style.display = 'none';
+        background.style.display = 'none';
+        formEdicao.reset();
+    });
+
+    document.getElementById('cancelar-edicao').addEventListener('click', function () {
+        formEdicao.style.display = 'none';
+        background.style.display = 'none';
+        formEdicao.reset();
+    });
+
+    // Função para editar um patrimônio com base no ID
+    function editarPatrimonio(id, ativo, categoria, detalhe, funcionario, estado) {
+        // Iterar pelas linhas da tabela para encontrar a linha correspondente com base no ID do patrimônio
+        Array.from(tbody.children).forEach(row => {
+            const rowPatrimonioId = row.querySelector('.edit-button').dataset.patrimonioId;
+            if (rowPatrimonioId === id) {
+                row.querySelector('td:nth-child(1)').textContent = categoria;
+                row.querySelector('td:nth-child(2)').textContent = detalhe;
+                row.querySelector('td:nth-child(3)').textContent = ativo ? 'Sim' : 'Não';
+                row.querySelector('td:nth-child(4)').textContent = funcionario;
+                row.querySelector('td:nth-child(5)').textContent = estado;
             }
         });
-    });
-}
-
-function getQueryParam() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('area');
-}
-
-function openForm(data) {
-    document.querySelector("#edit-form-container").style.display = "block";
-    document.querySelector("#category-input").value = data.category;
-    document.querySelector("#detail-input").value = data.detail
-    document.querySelector("#employee-input").value = data.employee;
-    document.querySelector("#state-input").value = data.state;
-
-    document.querySelector("#save-button").addEventListener("click", function () {
-        
-    })
-}
+    }
+});

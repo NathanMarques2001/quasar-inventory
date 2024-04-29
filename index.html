@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
   <link rel="stylesheet" type="text/css" href="./css/table.css" />
+  <link rel="stylesheet" type="text/css" href="./css/form.css" />
   <link rel="stylesheet" type="text/css" href="./css/reset.css" />
   <link rel="stylesheet" type="text/css" href="./css/global.css" />
   <title>Patrimônios</title>
@@ -18,8 +19,60 @@
   <script src="./components/navbar.js"></script>
   <main id="index-body-container">
     <input type="text" id="index-input" placeholder="Pesquise pelo detalhe">
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Detalhe</th>
+          <th>Ativo</th>
+          <th>Funcionário</th>
+          <th>Estado</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div id="form-container" style="display: none;">
+      <form id="form-edicao" style="display: none;">
+        <input type="hidden" id="edit-patrimonio-id" name="edit-patrimonio-id">
+        <div>
+          <label for="edit-categoria">Categoria:</label>
+          <input type="text" id="edit-categoria" name="edit-categoria" required>
+        </div>
+        <div>
+          <label for="edit-detalhe">Detalhe:</label>
+          <input type="text" id="edit-detalhe" name="edit-detalhe" required>
+        </div>
+        <div id="div-ativo">
+          <label for="edit-ativo">Ativo:</label>
+          <input type="checkbox" id="edit-ativo" name="edit-ativo">
+        </div>
+        <div>
+          <label for="edit-funcionario">Funcionário:</label>
+          <input type="text" id="edit-funcionario" name="edit-funcionario" required>
+        </div>
+        <div>
+          <label for="edit-estado">Estado:</label>
+          <select id="edit-estado" name="edit-estado" required>
+            <option value="bom">Bom</option>
+            <option value="usado">Usado</option>
+            <option value="velho">Velho</option>
+          </select>
+        </div>
+        
+        <input type="hidden" id="edit-id" name="edit-id">
+        <div>
+          <button type="submit">Salvar</button>
+          <button type="button" id="cancelar-edicao">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="./components/table.js"></script>
   </main>
-  <script src="./components/table.js"></script>
+
 </body>
 
 </html>
