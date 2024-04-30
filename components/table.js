@@ -3,11 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbody = document.querySelector('tbody');
     const background = document.getElementById('form-container');
 
-    // Supondo que o JSON esteja no arquivo "data.json"
+    const urlParams = new URLSearchParams(window.location.search);
+    const areaParam = urlParams.get('area');
+
     fetch('../data.json')
         .then(response => response.json())
         .then(data => {
-            // Função para adicionar uma linha à tabela
             function adicionarLinha(id, categoria, detalhe, ativo, funcionario, estado) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -24,18 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 tbody.appendChild(tr);
             }
 
-            // Iterar sobre as áreas e patrimônios para adicionar à tabela
             data.areas.forEach(area => {
-                area.patrimonies.forEach(patrimonio => {
-                    adicionarLinha(
-                        patrimonio.id,
-                        patrimonio.category,
-                        patrimonio.detail,
-                        patrimonio.active,
-                        patrimonio.employee,
-                        patrimonio.state
-                    );
-                });
+                if (!areaParam || area.name.toLowerCase() === areaParam.toLowerCase()) {
+                    area.patrimonies.forEach(patrimonio => {
+                        adicionarLinha(
+                            patrimonio.id,
+                            patrimonio.category,
+                            patrimonio.detail,
+                            patrimonio.active,
+                            patrimonio.employee,
+                            patrimonio.state
+                        );
+                    });
+                }
             });
         })
         .catch(error => console.error('Erro ao carregar o JSON:', error));
@@ -94,9 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formEdicao.reset();
     });
 
-    // Função para editar um patrimônio com base no ID
     function editarPatrimonio(id, ativo, categoria, detalhe, funcionario, estado) {
-        // Iterar pelas linhas da tabela para encontrar a linha correspondente com base no ID do patrimônio
         Array.from(tbody.children).forEach(row => {
             const rowPatrimonioId = row.querySelector('.edit-button').dataset.patrimonioId;
             if (rowPatrimonioId === id) {
@@ -108,4 +108,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    const indexInput = document.getElementById('index-input');
+    indexInput.addEventListener('input', function () {
+        const searchTerm = indexInput.value.trim().toLowerCase();
+        Array.from(tbody.children).forEach(row => {
+            const detalhe = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+            if (detalhe.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
 });

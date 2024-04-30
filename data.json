@@ -46,6 +46,28 @@
           "employee": "Employee GSI-5",
           "state": "State GSI-5"
         }
+      ],
+      "employees": [
+        {
+          "id": 1,
+          "name": "Employee GSI-1"
+        },
+        {
+          "id": 2,
+          "name": "Employee GSI-2"
+        },
+        {
+          "id": 3,
+          "name": "Employee GSI-3"
+        },
+        {
+          "id": 4,
+          "name": "Employee GSI-4"
+        },
+        {
+          "id": 5,
+          "name": "Employee GSI-5"
+        }
       ]
     },
     {
@@ -101,6 +123,32 @@
           "active": false,
           "employee": "Employee GS-6",
           "state": "State GS-6"
+        }
+      ],
+      "employees": [
+        {
+          "id": 6,
+          "name": "Employee GS-1"
+        },
+        {
+          "id": 7,
+          "name": "Employee GS-2"
+        },
+        {
+          "id": 8,
+          "name": "Employee GS-3"
+        },
+        {
+          "id": 9,
+          "name": "Employee GS-4"
+        },
+        {
+          "id": 10,
+          "name": "Employee GS-5"
+        },
+        {
+          "id": 11,
+          "name": "Employee GS-6"
         }
       ]
     },
@@ -165,6 +213,36 @@
           "active": false,
           "employee": "Employee TI-7",
           "state": "State TI-7"
+        }
+      ],
+      "employees": [
+        {
+          "id": 12,
+          "name": "Employee TI-1"
+        },
+        {
+          "id": 13,
+          "name": "Employee TI-2"
+        },
+        {
+          "id": 14,
+          "name": "Employee TI-3"
+        },
+        {
+          "id": 15,
+          "name": "Employee TI-4"
+        },
+        {
+          "id": 16,
+          "name": "Employee TI-5"
+        },
+        {
+          "id": 17,
+          "name": "Employee TI-6"
+        },
+        {
+          "id": 18,
+          "name": "Employee TI-7"
         }
       ]
     },
@@ -237,6 +315,40 @@
           "active": false,
           "employee": "Employee RH-8",
           "state": "State RH-8"
+        }
+      ],
+      "employees": [
+        {
+          "id": 19,
+          "name": "Employee RH-1"
+        },
+        {
+          "id": 20,
+          "name": "Employee RH-2"
+        },
+        {
+          "id": 21,
+          "name": "Employee RH-3"
+        },
+        {
+          "id": 22,
+          "name": "Employee RH-4"
+        },
+        {
+          "id": 23,
+          "name": "Employee RH-5"
+        },
+        {
+          "id": 24,
+          "name": "Employee RH-6"
+        },
+        {
+          "id": 25,
+          "name": "Employee RH-7"
+        },
+        {
+          "id": 26,
+          "name": "Employee RH-8"
         }
       ]
     }

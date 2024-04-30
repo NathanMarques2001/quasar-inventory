@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const jsonFile = "../data.json";
   let areasData = [];
 
-  // Função para carregar os dados do JSON
   function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createAreaCards(areas) {
     const areaCardsContainer = document.getElementById("area-cards-container");
-    areaCardsContainer.innerHTML = ""; // Limpa o conteúdo anterior
+    areaCardsContainer.innerHTML = "";
 
     areas.forEach(area => {
       const areaCard = document.createElement("div");
@@ -55,13 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
     createAreaCards(filteredAreas);
   }
 
-  // Evento de input para o campo de pesquisa
   document.getElementById("area-input").addEventListener("input", function () {
     const query = this.value.trim();
     filterAreasByName(query);
   });
 
-  // Carregar os dados das áreas
   fetch("https://api.prodemge.gov.br/areas")
     .then(response => response.json())
     .catch(error => {

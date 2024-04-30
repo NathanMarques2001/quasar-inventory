@@ -4,26 +4,53 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(100, 100, 100, 0.8);
   z-index: 999;
   display: flex;
 }
 
 #form-edicao {
-  background-color: white;
+  background-color: var(--black);
+  color: var(--white);
   padding: 20px;
   border-radius: 5px;
-  width: 30%;
+  width: 25%;
   top: 35%;
   left: 35%;
   position: absolute;
 }
 
-#form-edicao div {
+.form-div {
   margin-bottom: 2%;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 2%;
+}
+
+#form-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+#form-btn button {
+  width: 35%;
+}
+
+#salvar-edicao {
+  background-color: var(--green);
+}
+
+#cancelar-edicao {
+  background-color: var(--red);
+}
+
+#salvar-edicao:hover {
+  background-color: var(--hover-green);
+}
+
+#cancelar-edicao:hover {
+  background-color: var(--hover-red);
 }

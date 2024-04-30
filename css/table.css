@@ -4,6 +4,7 @@
     border: 1px solid var(--white);
     background-color: var(--black);
     color: var(--white);
+    margin-bottom: 1%;
 }
 
 #table th,
